@@ -2,6 +2,7 @@
 
 //cargar modelo
 require_once('models/User.php');
+require_once('models/UserRepository.php');
 
 session_start();
 //consultas a la base de datos

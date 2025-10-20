@@ -1,11 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
-    
+    LOGIN
+    <form action="index.php?c=user" method="POST">
+        <input type="text" name="username" placeholder="nombre de usuario">
+        <input type="password" name="password" placeholder="Tu contraseña">
+        <input type="submit" value="Entrar">
+    </form>
+
+    <p>¿No tienes cuenta? <a href="index.php?c=user&register=1">Registrarse</a></p>
+    <a href="index.php">Volver</a>
 </body>
+
 </html>

@@ -32,7 +32,7 @@ if (isset($_POST["registerSubmit"])) {
         $userCreated = UserRepository::register($_POST["username"], $_POST["password"], $_POST["password2"], $_POST["email"], $_POST["phone"], $_POST["avatar"], $avatarPath);
         if ($userCreated) {
             require_once('views/loginView.phtml');
-            header('Location: index.php?c=user');
+            header('Location: index.php?c=user&login=1');
             exit;
         }
     }
@@ -40,9 +40,11 @@ if (isset($_POST["registerSubmit"])) {
     exit;
 }
 
-
-
 //Login
+if (isset($_GET['login'])) {
+    require_once('views/loginView.phtml');
+    exit;
+}
 if (isset($_POST['username']) && isset($_POST['password'])) {
     $_SESSION["user"] = UserRepository::login($_POST['username'], $_POST['password']);
     header('location:index.php');
