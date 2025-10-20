@@ -1,31 +1,30 @@
 <?php
 class UserRepository
 {
-    public static function register($username, $password, $password2)
+    public static function register($username, $password, $password2, $email, $phone, $avatar)
     {
         $db = Connection::connect();
         if ($password != $password2) {
             return false;
         }
         $encrypted = md5($password);
-        $q = "INSERT INTO users (username, password, rol) VALUES ('$username', '$encrypted', 0)";
+        $q = "INSERT INTO users (username, password, email, phone, avatar,  rol) VALUES ('$username', '$encrypted', '$email', '$phone', '$avatar', 0)";
         $insert = $db->query($q);
         if ($insert) {
             return true;
         } else {
             return false;
         }
-
     }
 
-    public static function login($username, $password, $avatar)
+    public static function login($username, $password)
     {
         $db = Connection::connect();
         $encrypted = md5($password);
         $q = "SELECT * FROM users WHERE username = '$username' AND password = '$encrypted'";
         $search = $db->query($q);
         if ($row = $search->fetch_assoc()) {
-            return new User($row['id'], $row['username'], $row['password'], $row['rol']);
+            return new User($row['id'], $row['username'], $row['password'], $row["email"], $row["phone"], $row["avatar"], $row['rol']);
         } else {
             return false;
         }
@@ -39,18 +38,17 @@ class UserRepository
         $search = $db->query($q);
 
         if ($row = $search->fetch_assoc()) {
-            return new User($row['id'], $row['username'], $row['password'], $row['rol'], $row['avatar'] ?? null);
+            return new User($row['id'], $row['username'], $row['password'], $row["email"], $row["phone"], $row["avatar"], $row['rol']);
         } else {
             return false;
         }
     }
     public static function updateAvatar($userId, $relativePath)
-{
-    $db = Connection::connect();
-    $userId = intval($userId);
-    $relativePath = $db->real_escape_string($relativePath);
-    $q = "UPDATE users SET avatar = '$relativePath' WHERE id = $userId";
-    return $db->query($q) ? true : false;
-}
-
+    {
+        $db = Connection::connect();
+        $userId = intval($userId);
+        $relativePath = $db->real_escape_string($relativePath);
+        $q = "UPDATE users SET avatar = '$relativePath' WHERE id = $userId";
+        return $db->query($q) ? true : false;
+    }
 }
