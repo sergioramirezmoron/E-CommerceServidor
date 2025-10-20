@@ -1,28 +1,5 @@
 <?php
-<<<<<<< HEAD
 
-
-class CategoryRepository{
-    public static function getCategories(){
-        $db = Connection::connect();
-        $q = "SELECT * FROM categories";
-        $search = $db->query($q);
-    }
-
-    public static function getCategoryById($id){
-        $db = Connection::connect();
-        $id = intval($id);
-        $q = "SELECT * FROM categories WHERE id = $id";
-        $search = $db->query($q);
-        if ($row = $search->fetch_assoc()) {
-            return new Category($row['id'], $row['name'], $row['description']);
-        } else {
-            return false;
-        }
-    }
-
-
-=======
 class CategoryRepository
 {
     public static function getAllCategories()
@@ -66,5 +43,4 @@ class CategoryRepository
         $db->query($q);
         $db->close();
     }
->>>>>>> 155e6e0c90007fe665c6f599d65d410995325e82
 }
