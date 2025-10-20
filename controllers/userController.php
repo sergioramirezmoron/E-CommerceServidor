@@ -5,6 +5,7 @@ include_once("helpers/FileHelper.php");
 if (isset($_GET['logout'])) {
     $_SESSION['user'] = false;
     header('location:index.php');
+    exit;
 }
 
 //profile
