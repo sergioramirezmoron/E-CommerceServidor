@@ -2,7 +2,7 @@
 
 class ProductRepository
 {
-    public function getAllProducts()
+    public static function getAllProducts()
     {
         $db = Connection::connect();
         $q = "SELECT * FROM products";
@@ -23,7 +23,7 @@ class ProductRepository
         return $products;
     }
 
-    public function getProductById($id)
+    public static function getProductById($id)
     {
         $db = Connection::connect();
         $q = "SELECT * FROM products WHERE id = $id";
@@ -44,7 +44,7 @@ class ProductRepository
         return $product;
     }
 
-    public function addProduct($name, $description, $price, $stock, $idCategory, $image)
+    public static function addProduct($name, $description, $price, $stock, $idCategory, $image)
     {
         $db = Connection::connect();
         $q = "INSERT INTO products VALUES (null, '$name', '$description', $price, $stock, $idCategory, '$image')";
@@ -52,7 +52,7 @@ class ProductRepository
         $db->close();
     }
 
-    public function updateProduct($id, $name, $description, $price, $stock, $idCategory, $image)
+    public static function updateProduct($id, $name, $description, $price, $stock, $idCategory, $image)
     {
         $db = Connection::connect();
         $q = "UPDATE products SET name='$name', description='$description', price=$price, stock=$stock, idCategory=$idCategory, image='$image' WHERE id=$id";
@@ -60,7 +60,7 @@ class ProductRepository
         $db->close();
     }
 
-    public function deleteProduct($id)
+    public static function deleteProduct($id)
     {
         $db = Connection::connect();
         $q = "DELETE FROM products WHERE id=$id";
