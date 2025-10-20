@@ -49,6 +49,6 @@ class Product
     }
     public function getImage()
     {
-        return $this-> image;
+        return $this->image;
     }
 }
