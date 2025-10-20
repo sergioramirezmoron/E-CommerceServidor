@@ -17,9 +17,5 @@ if (!isset($_SESSION['user'])) {
 if (isset($_GET['c'])) {
     require_once('controllers/' . $_GET['c'] . 'Controller.php');
 } else {
-    if (!($_SESSION['user'])) {
-        require_once('controllers/userController.php');
-    } else {
-        require_once('views/mainView.phtml');
-    }
+    require_once('views/mainView.phtml');
 }

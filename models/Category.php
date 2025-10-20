@@ -6,7 +6,7 @@ class Category
     private $id;
     private $name;
     private $description;
-    
+
 
 
     public function __construct($id, $name, $description)
