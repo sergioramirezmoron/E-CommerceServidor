@@ -1,6 +1,6 @@
 <?php
 
-class User
+class Category
 {
 
     private $id;
@@ -12,8 +12,8 @@ class User
     public function __construct($id, $name, $description)
     {
         $this->id = $id;
-        $this->username = $name;
-        $this->password = $description;
+        $this->name = $name;
+        $this->description = $description;
     }
 
     public function getId()
