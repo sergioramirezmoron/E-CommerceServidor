@@ -12,7 +12,6 @@ if (!isset($_SESSION['user'])) {
     $_SESSION['user'] = false;
 }
 
-
 //mostrar vista
 if (isset($_GET['c'])) {
     require_once('controllers/' . $_GET['c'] . 'Controller.php');
