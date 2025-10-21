@@ -7,8 +7,8 @@ class ProductCartRepository
     {
         $db = Connection::connect();
         $q = "INSERT INTO product_cart VALUES (null, $quantity, $idCart, $idProduct)";
-        $insert = $db->query($q);
-        if ($insert) {
+        $result = $db->query($q);
+        if ($result) {
             return true;
         } else {
             return false;
@@ -17,10 +17,10 @@ class ProductCartRepository
     public static function getCartProducts($idCart)
     {
         $db = Connection::connect();
-        $q = "SELECT * FROM product_cart WHERE id = $idCart";
-        $search = $db->query($q);
+        $q = "SELECT * FROM product_cart WHERE id_cart = $idCart";
+        $result = $db->query($q);
         $products = [];
-        while ($row = $search->fetch_assoc()) {
+        while ($row = $result->fetch_assoc()) {
             $products[] = new ProductCart(
                 $row['id'],
                 $row['quantity'],
@@ -35,9 +35,9 @@ class ProductCartRepository
     {
         $db = Connection::connect();
         $id = intval($id);
-        $q = "DELETE FROM product_cart WHERE id = $id";
-        $delete = $db->query($q);
-        if ($delete) {
+        $q = "DELETE FROM product_cart WHERE id_product = $id";
+        $result = $db->query($q);
+        if ($result) {
             return true;
         } else {
             return false;
@@ -47,33 +47,12 @@ class ProductCartRepository
     public static function updateProductQuantity($id, $quantity)
     {
         $db = Connection::connect();
-        $id = intval($id);
-        $quantity = intval($quantity);
         $q = "UPDATE product_cart SET quantity = $quantity WHERE id = $id";
-        $update = $db->query($q);
-        if ($update) {
+        $result = $db->query($q);
+        if ($result) {
             return true;
         } else {
             return false;
         }
-    }
-
-    public static function getProducts()
-    {
-        $db = Connection::connect();
-
-        $q = "SELECT * FROM product_cart";
-        $search = $db->query($q);
-
-        $products = [];
-        while ($row = $search->fetch_assoc()) {
-            $products[] = new ProductCart(
-                $row['id'],
-                $row['quantity'],
-                $row['id_cart'],
-                $row['id_product']
-            );
-        }
-        return $products;
     }
 }
