@@ -18,12 +18,18 @@
         }
     }
     ?>
-    <form action="index.php?c=cart&finish=1" method="POST">
-        <input type="submit" name="finishBuys" value="Finalizar Compra">
-    </form>
-    <form action="index.php?c=cart&cart=<?php echo $_GET['cart']; ?>" method="POST">
-        <input type="submit" name="clearCart" value="Vaciar Carrito">
-    </form>
+    <?php
+    if (!empty($productsCart)) { ?>
+        <form action="index.php?c=cart&finish=1" method="POST">
+            <input type="submit" name="finishBuys" value="Finalizar Compra">
+        </form>
+
+        <form action="index.php?c=cart&cart=<?php echo $_GET['cart']; ?>" method="POST">
+            <input type="submit" name="clearCart" value="Vaciar Carrito">
+        </form>
+    <?php
+    }
+    ?>
     <a href="index.php">Seguir Comprando</a>
 </body>
 

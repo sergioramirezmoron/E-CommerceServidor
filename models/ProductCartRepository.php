@@ -6,10 +6,10 @@ class ProductCartRepository
     public static function addProductToCart($idCart, $idProduct, $quantity)
     {
         $db = Connection::connect();
-        
+
         $checkQuery = "SELECT * FROM product_cart WHERE id_cart = $idCart AND id_product = $idProduct";
         $checkResult = $db->query($checkQuery);
-        
+
         if ($checkResult && $checkResult->num_rows > 0) {
             $row = $checkResult->fetch_assoc();
             $newQuantity = $row['quantity'] + $quantity;
@@ -19,7 +19,7 @@ class ProductCartRepository
             $q = "INSERT INTO product_cart VALUES (null, $quantity, $idCart, $idProduct)";
             $result = $db->query($q);
         }
-        
+
         if ($result) {
             return true;
         } else {
@@ -60,6 +60,18 @@ class ProductCartRepository
     {
         $db = Connection::connect();
         $idCart = intval($idCart);
+        $q = "DELETE FROM product_cart WHERE id_cart = $idCart";
+        $result = $db->query($q);
+        if ($result) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static function finalizePurchase($idCart)
+    {
+        $db = Connection::connect();
         $q = "DELETE FROM product_cart WHERE id_cart = $idCart";
         $result = $db->query($q);
         if ($result) {

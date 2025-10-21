@@ -21,7 +21,9 @@ if (isset($_GET['cart'])) {
 
 // Finalizar compra
 if (isset($_POST["finishBuys"])) {
+    ProductCartRepository::finalizePurchase($_GET["cart"]);
     require_once('views/soldView.phtml');
+    header('Location: index.php');
     exit;
 }
 
