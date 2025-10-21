@@ -13,11 +13,3 @@ if (isset($_GET['add'])) {
     header('Location: index.php?c=cart&cart=' . $idCart);
     exit;
 }
-
-//Eliminar del carrito
-if (isset($_POST['deleteFromCart'])) {
-    if (!isset($_SESSION['user'])) {
-        header('Location: index-php?c=user&login=1');
-        exit;
-    }
-}
