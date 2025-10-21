@@ -11,7 +11,7 @@
     <?php
     if (!empty($_SESSION['user'])) {
         echo "<a href='index.php?c=user&logout=1'>Cerrar Sesión</a>";
-        if($_SESSION['user']->getRol()){
+        if ($_SESSION['user']->getRol()) {
             echo " | <a href='index.php?c=product&create=1'>Crear producto</a>";
         }
     } else {
@@ -19,8 +19,9 @@
     }
     ?>
     <?php
-    foreach ($products as $product){
+    foreach ($products as $product) {
         echo "<div>";
+        echo "<img src='public/img/" . $product->getImage() . "' alt='" . $product->getName() . "' style='width:150px;height:150px;'>";
         echo "<h2>" . $product->getName() . "</h2>";
         echo "<p>Precio: $" . $product->getPrice() . "</p>";
         echo "<a href='index.php?c=product&id=" . $product->getId() . "'>Ver Producto</a>";
@@ -28,4 +29,5 @@
     }
     ?>
 </body>
+
 </html>

@@ -15,8 +15,8 @@ class ProductRepository
                 $row['description'],
                 $row['price'],
                 $row['stock'],
-                $row["idCategory"],
-                $row['image']
+                $row['image'],
+                $row["id_category"]
             );
         }
         $db->close();
@@ -36,26 +36,28 @@ class ProductRepository
                 $row['description'],
                 $row['price'],
                 $row['stock'],
-                $row["idCategory"],
-                $row['image']
+                $row['image'],
+                $row["id_category"]
             );
         }
         $db->close();
         return $product;
     }
 
-    public static function addProduct($name, $description, $price, $stock, $idCategory, $image)
+    public static function addProduct($name, $description, $price, $stock, $image, $idCategory)
     {
         $db = Connection::connect();
-        $q = "INSERT INTO products VALUES (null, '$name', '$description', $price, $stock, $idCategory, '$image')";
+        $q = "INSERT INTO products VALUES (null, '$name', '$description', $price, $stock, '$image', $idCategory)";
         $db->query($q);
+        $newId = $db->insert_id;
         $db->close();
+        return $newId;
     }
 
-    public static function updateProduct($id, $name, $description, $price, $stock, $idCategory, $image)
+    public static function updateProduct($id, $name, $description, $price, $stock, $image, $idCategory,)
     {
         $db = Connection::connect();
-        $q = "UPDATE products SET name='$name', description='$description', price=$price, stock=$stock, idCategory=$idCategory, image='$image' WHERE id=$id";
+        $q = "UPDATE products SET name='$name', description='$description', price=$price, stock=$stock, image='$image',idCategory=$idCategory, WHERE id=$id";
         $db->query($q);
         $db->close();
     }
