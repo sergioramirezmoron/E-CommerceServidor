@@ -6,8 +6,7 @@ if (isset($_GET['cart'])) {
 
 // Ver carrito
 if (isset($_GET['cart'])) {
-    $cartId = CartRepository::getCartByUserId($_SESSION['user']->getId());
-    $products = ProductCartRepository::getCartProducts($cartId);
+    $products = ProductCartRepository::getCartProducts($_GET["cart"]);
     require_once('views/cartView.phtml');
     exit;
 }
