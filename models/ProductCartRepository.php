@@ -1,79 +1,58 @@
 
 
 <?php
-class ProductCartRepository{
-    public static function addProductToCart($id, $idCart, $idProduct, $quantity){
+class ProductCartRepository
+{
+    public static function addProductToCart($idCart, $idProduct, $quantity)
+    {
         $db = Connection::connect();
-        $idCart = intval($idCart);
-        $idProduct = intval($idProduct);
-        $quantity = intval($quantity);
-        $q = "INSERT INTO productcarts VALUES (null, $quantity, $idCart, $idProduct)";
-        $insert = $db->query($q);
-        if ($insert) {
+        $q = "INSERT INTO product_cart VALUES (null, $quantity, $idCart, $idProduct)";
+        $result = $db->query($q);
+        if ($result) {
             return true;
         } else {
             return false;
         }
-    
     }
-    public static function getCartProducts($idCart){
+    public static function getCartProducts($idCart)
+    {
         $db = Connection::connect();
-        $idCart = intval($idCart);
-        $q = "SELECT * FROM productcarts WHERE idCart = $idCart";
-        $search = $db->query($q);
+        $q = "SELECT * FROM product_cart WHERE id_cart = $idCart";
+        $result = $db->query($q);
         $products = [];
-        while ($row = $search->fetch_assoc()) {
+        while ($row = $result->fetch_assoc()) {
             $products[] = new ProductCart(
                 $row['id'],
                 $row['quantity'],
-                $row['idCart'],
-                $row['idProduct']
+                $row['id_cart'],
+                $row['id_product']
             );
         }
         return $products;
     }
 
-    public static function deleteProductFromCart($id){
+    public static function deleteProductFromCart($id)
+    {
         $db = Connection::connect();
         $id = intval($id);
-        $q = "DELETE FROM productcarts WHERE id = $id";
-        $delete = $db->query($q);
-        if ($delete) {
+        $q = "DELETE FROM product_cart WHERE id_product = $id";
+        $result = $db->query($q);
+        if ($result) {
             return true;
         } else {
             return false;
         }
     }
 
-    public static function updateProductQuantity($id, $quantity){
+    public static function updateProductQuantity($id, $quantity)
+    {
         $db = Connection::connect();
-        $id = intval($id);
-        $quantity = intval($quantity);
-        $q = "UPDATE productcarts SET quantity = $quantity WHERE id = $id";
-        $update = $db->query($q);
-        if ($update) {
+        $q = "UPDATE product_cart SET quantity = $quantity WHERE id = $id";
+        $result = $db->query($q);
+        if ($result) {
             return true;
         } else {
             return false;
         }
     }
-
-    public static function getProducts(){
-        $db = Connection::connect();
-
-        $q = "SELECT * FROM productcarts";
-        $search = $db->query($q);
-
-        $products = [];
-        while ($row = $search->fetch_assoc()) {
-            $products[] = new ProductCart(
-                $row['id'],
-                $row['quantity'],
-                $row['idCart'],
-                $row['idProduct']
-            );
-        }
-        return $products;
-    }
-
 }

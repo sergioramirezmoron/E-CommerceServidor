@@ -1,7 +1,9 @@
 <?php
-class CartRepository{
+class CartRepository
+{
 
-    public static function createCart($userId){
+    public static function createCart($userId)
+    {
         $db = Connection::connect();
         $q = "INSERT INTO carts VALUES (null, $userId)";
         $insert = $db->query($q);
@@ -12,26 +14,33 @@ class CartRepository{
         }
     }
 
-    public static function getCartByUserId($userId){
+    public static function getCartByUserId($userId)
+    {
         $db = Connection::connect();
         $q = "SELECT * FROM carts WHERE id_user = $userId";
-        $search = $db->query($q);
-        if ($row = $search->fetch_assoc()) {
+        $result = $db->query($q);
+        if ($row = $result->fetch_assoc()) {
             return new Cart($row['id'], $row['id_user']);
         } else {
             return false;
         }
     }
 
-    public static function getCartById($id){
+    public static function getCartById($id)
+    {
         $db = Connection::connect();
         $id = intval($id);
         $q = "SELECT * FROM carts WHERE id = $id";
-        $search = $db->query($q);   
-
+        $result = $db->query($q);
+        if ($row = $result->fetch_assoc()) {
+            return new Cart($row['id'], $row['id_user']);
+        } else {
+            return false;
+        }
     }
 
-    public static function deleteCart($id){
+    public static function deleteCart($id)
+    {
         $db = Connection::connect();
         $id = intval($id);
         $q = "DELETE FROM carts WHERE id = $id";
@@ -43,21 +52,18 @@ class CartRepository{
         }
     }
 
-    public static function getCarts(){
+    public static function getCarts()
+    {
         $db = Connection::connect();
         $q = "SELECT * FROM carts";
-        $search = $db->query($q);
+        $result = $db->query($q);
         $carts = [];
-        while ($row = $search->fetch_assoc()) {
+        while ($row = $result->fetch_assoc()) {
             $carts[] = new Cart(
                 $row['id'],
-                $row['userId']
+                $row['id_user']
             );
         }
         return $carts;
-
     }
-
-
 }
-
