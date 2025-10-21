@@ -1,4 +1,10 @@
 <?php
+if (isset($_GET['cart'])) {
+    // si usas sesión/consulta de items, ponlo aquí; si no, solo carga la vista
+    require_once('views/cartView.phtml');
+    exit;
+}
+
 // Ver carrito
 if (isset($GET['cart'])){
     $cartId = CartRepository::getCartByUserId($_SESSION['user']->getId());
