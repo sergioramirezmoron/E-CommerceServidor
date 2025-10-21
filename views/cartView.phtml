@@ -20,7 +20,7 @@
     ?>
     <?php
     if (!empty($productsCart)) { ?>
-        <form action="index.php?c=cart&finish=1" method="POST">
+        <form action="index.php?c=cart&cart=<?php echo $_GET['cart']?>&finish=1" method="POST">
             <input type="submit" name="finishBuys" value="Finalizar Compra">
         </form>
 

@@ -1,4 +1,10 @@
 <?php
+// Finalizar compra
+if (isset($_POST["finishBuys"])) {
+    ProductCartRepository::finalizePurchase($_GET["cart"]);
+    require_once('views/soldView.phtml');
+    exit;
+}
 // Vaciar carrito
 if (isset($_POST['clearCart'])) {
     $idCart = $_GET["cart"];
@@ -18,10 +24,3 @@ if (isset($_GET['cart'])) {
     require_once('views/cartView.phtml');
     exit;
 }
-
-// Finalizar compra
-if (isset($_POST["finishBuys"])) {
-    require_once('views/soldView.phtml');
-    exit;
-}
-
