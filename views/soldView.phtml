@@ -1,17 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
     <h2>Compra realizada</h2>
 
     <p>¡Gracias por tu compra!</p>
 
-     <p>Gracias por tu compra, <strong><?= $_SESSION["user"]->getUsername() ?></strong>.</p>
+    <p>Gracias por tu compra, <strong><?= $_SESSION["user"]->getUsername() ?></strong>.</p>
     <p>Total pagado: <strong><?= number_format($total, 2) ?> €</strong></p>
+
+    <h2>Obtener detalles de pedido:</h2>
+    
+
     <a href="index.php">Volver a la tienda</a>
 </body>
+
 </html>
