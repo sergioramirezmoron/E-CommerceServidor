@@ -80,4 +80,15 @@ class ProductCartRepository
             return false;
         }
     }
+    public static function getCartTotal($idCart)
+    {
+        $db = Connection::connect();
+        $q = "SELECT SUM(price * quantity) FROM product_cart INNER JOIN products ON product_cart.id_product = products.id WHERE product_cart.id_cart = $idCart";
+        $result = $db->query($q);
+        if ($row = $result->fetch_assoc()) {
+            return $row['SUM(price * quantity)'];
+        } else {
+            return false;
+        }
+    }
 }
