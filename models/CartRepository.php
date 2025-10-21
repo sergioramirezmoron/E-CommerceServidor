@@ -3,7 +3,6 @@ class CartRepository{
 
     public static function createCart($userId){
         $db = Connection::connect();
-        $userId = intval($userId);
         $q = "INSERT INTO carts VALUES (null, $userId)";
         $insert = $db->query($q);
         if ($insert) {
@@ -15,11 +14,10 @@ class CartRepository{
 
     public static function getCartByUserId($userId){
         $db = Connection::connect();
-        $userId = intval($userId);
-        $q = "SELECT * FROM carts WHERE userId = $userId";
+        $q = "SELECT * FROM carts WHERE id_user = $userId";
         $search = $db->query($q);
         if ($row = $search->fetch_assoc()) {
-            return new Cart($row['id'], $row['userId']);
+            return new Cart($row['id'], $row['id_user']);
         } else {
             return false;
         }
