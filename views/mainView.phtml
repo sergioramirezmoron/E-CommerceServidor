@@ -11,6 +11,9 @@
     <?php
     if (!empty($_SESSION['user'])) {
         echo "<a href='index.php?c=user&logout=1'>Cerrar Sesión</a>";
+        if($_SESSION['user']->getRol()){
+            echo " | <a href='index.php?c=product&create=1'>Crear producto</a>";
+        }
     } else {
         echo "<a href='index.php?c=user&login=1'>Iniciar Sesión</a> | <a href='index.php?c=user&register=1'>Registrarse</a>";
     }
@@ -25,5 +28,4 @@
     }
     ?>
 </body>
-
 </html>

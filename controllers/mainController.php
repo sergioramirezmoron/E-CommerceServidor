@@ -19,6 +19,6 @@ if (!isset($_SESSION['user'])) {
 if (isset($_GET['c'])) {
     require_once('controllers/' . $_GET['c'] . 'Controller.php');
 } else {
-    $topics = ProductRepository::getAllProducts();
+    $products = ProductRepository::getAllProducts();
     require_once('views/mainView.phtml');
 }
