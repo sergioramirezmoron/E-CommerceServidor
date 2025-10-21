@@ -26,5 +26,6 @@ if (isset($_GET['c'])) {
     require_once('controllers/' . $_GET['c'] . 'Controller.php');
 } else {
     $products = ProductRepository::getAllProducts();
+    $cart = CartRepository::getCartByUserId($_SESSION['user'] ? $_SESSION['user']->getId() : 0);
     require_once('views/mainView.phtml');
 }

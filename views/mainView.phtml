@@ -13,6 +13,7 @@
         echo "<a href='index.php?c=user&logout=1'>Cerrar Sesión</a>";
         echo " | <a href='index.php?c=cart&cart=1'>Mi Carrito</a>";
         echo " | <a href='index.php?c=user&profile=1'>Mi Perfil</a>";
+        
         if ($_SESSION['user']->getRol()) {
             echo " | <a href='index.php?c=product&create=1'>Crear producto</a>";
         }
@@ -27,6 +28,9 @@
         echo "<h2>" . $product->getName() . "</h2>";
         echo "<p>Precio: $" . $product->getPrice() . "</p>";
         echo "<a href='index.php?c=product&id=" . $product->getId() . "'>Ver Producto</a>";
+        if (!empty($_SESSION['user'])) {
+            echo " | <a href='index.php?c=cart&cart=1&add=" . $product->getId() . "'>Agregar al Carrito</a>";
+        }
         echo "</div>";
     }
     ?>
