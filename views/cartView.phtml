@@ -11,7 +11,11 @@
     <h1>Tu Carrito</h1>
     <?php
     foreach ($productsCart as $product) {
-        echo $product->getIdProduct(). " x" . $product->getQuantity();
+        foreach ($products as $prod) {
+            if ($prod->getId() == $product->getIdProduct()) {
+                echo $prod->getName() . " - $" . $prod->getPrice() . " | x" . $product->getQuantity() . "<br>";
+            }
+        }
     }
     ?>
     <form action="index.php?c=cart&finish=1" method="POST">
