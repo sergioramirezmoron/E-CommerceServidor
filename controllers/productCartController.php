@@ -28,8 +28,8 @@ if (isset($_GET['clear'])) {
     $res = $db->query("SELECT id FROM carts WHERE user_id=$userId LIMIT 1");
     if ($row = $res->fetch_assoc()) {
         $cartId = (int)$row['id'];
-        $db->query("DELETE FROM productcarts WHERE idCart = $cartId");
+        $db->query("DELETE FROM product_cart WHERE idCart = $cartId");
     }
-    header('Location: index.php?c=cart&index=1');
+    header('Location: index.php?c=cart&cart=1');
     exit;
 }
