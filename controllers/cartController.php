@@ -16,3 +16,4 @@ if (isset($_POST["finishBuys"])) {
     require_once('views/soldView.phtml');
     exit;
 }
+

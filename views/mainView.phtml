@@ -32,7 +32,7 @@
         echo "<a href='index.php?c=product&id=" . $product->getId() . "'>Ver Producto</a>";
         if (!empty($_SESSION['user'])) {
     ?>
-            | <a href='index.php?c=cart&cart=<?php echo CartRepository::getCartByUserId($_SESSION["user"]->getId())->getId() ?>&add=<?php echo $product->getId() ?>'>Agregar al Carrito</a>
+            | <a href='index.php?c=productCart&cart=<?php echo CartRepository::getCartByUserId($_SESSION["user"]->getId())->getId() ?>&add=<?php echo $product->getId() ?>'>Agregar al Carrito</a>
     <?php
         }
         echo "</div>";
