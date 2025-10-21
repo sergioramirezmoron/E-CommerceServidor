@@ -30,7 +30,7 @@ if (isset($_POST["registerSubmit"])) {
                 $avatarPath = $name;
             }
         }
-        $userCreated = UserRepository::register($_POST["username"], $_POST["password"], $_POST["password2"], $_POST["email"], $_POST["phone"], $_POST["avatar"], $avatarPath);
+        $userCreated = UserRepository::register($_POST["username"], $_POST["password"], $_POST["password2"], $_POST["email"], $_POST["phone"], $avatarPath);
         if ($userCreated) {
             require_once('views/loginView.phtml');
             header('Location: index.php?c=user&login=1');
