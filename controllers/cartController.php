@@ -1,23 +1,15 @@
 <?php
 // Ver carrito
-if (isset($GET['index'])){
-    if (!isset($_SESSION['user']) || !$_SESSION['USER']){
-        header ('Location: index-php?c=user&login=1');
-        exit;
-    }
-    $userId = intval($_SESSION['user']->getId());
-    $cartId = CartRepository::getCartByUserId($userId);
+if (isset($GET['cart'])){
+    $cartId = CartRepository::getCartByUserId($_SESSION['user']->getId());
     $products = ProductCartRepository::getCartProducts($cartId);
     require_once('views/cartView.phtml');
+    exit;
 }
 
 
 // Añadir al carrito
 if (isset($_POST['addToCart'])){
-    if (!isset($_SESSION['user']) || !$_SESSION['USER']){
-        header ('Location: index-php?c=user&login=1');
-        exit;
-    }
      $db       = Connection::connect();
     $userId   = (int)$_SESSION['user']->getId();
     $productId= isset($_POST['product_id']) ? (int)$_POST['product_id'] : 0;
@@ -31,7 +23,7 @@ if (isset($_POST['addToCart'])){
     }
 
     ProductCartRepository::addProductToCart(null, $cartId, $productId, $qty);
-    header('Location: index.php?c=cart&index=1'); exit;
+    header('Location: index.php?c=cart&cart=1'); exit;
 }
 
 
