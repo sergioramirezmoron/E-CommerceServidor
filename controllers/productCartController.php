@@ -8,3 +8,11 @@ if (isset($_GET['add'])) {
     header('Location: index.php?c=cart&cart=' . $idCart);
     exit;
 }
+
+// Eliminar todo del carrito
+if (isset($_POST['clearCart'])) {
+    $idCart = $_GET["cart"];
+    ProductCartRepository::clearCart($idCart);
+    header('Location: index.php?c=cart&cart=' . $idCart);
+    exit;
+}
