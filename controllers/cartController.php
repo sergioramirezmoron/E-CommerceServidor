@@ -1,11 +1,4 @@
 <?php
-require_once('models/CartRepository.php');
-require_once('models/ProductRepository.php');
-require_once('models/ProductCartRepository.php');
-require_once('models/OrderRepository.php');
-require_once('models/CategoryRepository.php');
-require_once('models/UserRepository.php');
-
 // Ver carrito
 if (isset($GET['index'])){
     if (!isset($_SESSION['user']) || !$_SESSION['USER']){

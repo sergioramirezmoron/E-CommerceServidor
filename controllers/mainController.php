@@ -3,8 +3,14 @@
 //cargar modelo
 require_once('models/User.php');
 require_once('models/Product.php');
+require_once('models/Cart.php');
+require_once('models/Order.php');
+require_once('models/Category.php');
 require_once('models/UserRepository.php');
 require_once('models/ProductRepository.php');
+require_once('models/CartRepository.php');
+require_once('models/OrderRepository.php');
+require_once('models/CategoryRepository.php');
 
 session_start();
 //consultas a la base de datos

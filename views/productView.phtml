@@ -8,6 +8,14 @@
 </head>
 
 <body>
+    <h2>Detalle del producto</h2>
+    <?php
+    echo "<h3>" . $product->getName() . "</h3>";
+    echo "<img src='public/img/" . $product->getImage() . "' alt='" . $product->getName() . "' style='width:150px;height:150px;'>";
+    echo "<p>" . $product->getDescription() . "</p>";
+    echo "<p>Precio: $" . $product->getPrice() . "</p>";
+    echo "<p>Stock disponible: " . $product->getStock() . "</p>";
+    ?>
     <a href="index.php">Volver</a>
 </body>
 
