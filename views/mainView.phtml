@@ -15,6 +15,15 @@
         echo "<a href='index.php?c=user&login=1'>Iniciar Sesión</a> | <a href='index.php?c=user&register=1'>Registrarse</a>";
     }
     ?>
+    <?php
+    foreach ($products as $product){
+        echo "<div>";
+        echo "<h2>" . $product->getName() . "</h2>";
+        echo "<p>Precio: $" . $product->getPrice() . "</p>";
+        echo "<a href='index.php?c=product&id=" . $product->getId() . "'>Ver Producto</a>";
+        echo "</div>";
+    }
+    ?>
 </body>
 
 </html>
