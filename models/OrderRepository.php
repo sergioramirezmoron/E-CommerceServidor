@@ -34,7 +34,7 @@ class OrderRepository
     public static function createOrder($status, $date, $idUser, $idCart)
     {
         $db = Connection::connect();
-        $q = "INSERT INTO orders VALUES (null, '$status', '$date', $idUser, $idCart)";
+        $q = "INSERT INTO orders VALUES (null, $idUser, $idCart, '$status', '$date' )";
         $insert = $db->query($q);
         if ($insert) {
             return true;

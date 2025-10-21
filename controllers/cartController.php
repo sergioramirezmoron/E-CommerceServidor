@@ -2,6 +2,7 @@
 // Finalizar compra
 if (isset($_POST["finishBuys"])) {
     ProductCartRepository::finalizePurchase($_GET["cart"]);
+    $order = OrderRepository::createOrder("completed", date("Y-m-d H:i:s"), $_SESSION['user']->getId(), $_GET["cart"]);
     require_once('views/soldView.phtml');
     exit;
 }
