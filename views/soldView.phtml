@@ -10,39 +10,7 @@
 
     <p>¡Gracias por tu compra!</p>
 
-    <?php
-    $usuario = 'usuario';
-if (!empty($_SESSION['username'])) {
-    $usuario = $_SESSION['username'];
-} elseif (!empty($_SESSION['user_id'])) {
-    $u = UserRepository::getUserById((int)$_SESSION['user_id']);
-    if ($u && method_exists($u, 'getUsername')) {
-        $usuario = $u->getUsername();
-    }
-}
-
-$cartId = null;
-if (!empty($_GET['cart'])) {
-    $cartId = (int)$_GET['cart'];
-} elseif (!empty($_SESSION['user_id'])) {
-    $c = CartRepository::getCartByUserId((int)$_SESSION['user_id']);
-    if ($c) $cartId = (int)$c->getId();
-}
-$total = 0.0;
-if ($cartId) {
-    $items = ProductCartRepository::getCartProducts($cartId);
-    foreach ($items as $it) {
-        $p = ProductRepository::getProductById($it->getIdProduct());
-        if ($p) {
-            // Forzamos tipos por si price viene como string
-            $precio = floatval($p->getPrice());
-            $qty    = (int)$it->getQuantity();
-            $total += $precio * $qty;
-        }
-    }
-}
-    ?>
-     <p>Gracias por tu compra, <strong><?= htmlspecialchars($usuario) ?></strong>.</p>
+     <p>Gracias por tu compra, <strong><?= $_SESSION["user"]->getUsername() ?></strong>.</p>
     <p>Total pagado: <strong><?= number_format($total, 2) ?> €</strong></p>
     <a href="index.php">Volver a la tienda</a>
 </body>

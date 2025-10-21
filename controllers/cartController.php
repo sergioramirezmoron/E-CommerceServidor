@@ -5,6 +5,7 @@ if (isset($_POST["finishBuys"])) {
     require_once('views/soldView.phtml');
     exit;
 }
+
 // Vaciar carrito
 if (isset($_POST['clearCart'])) {
     $idCart = $_GET["cart"];
