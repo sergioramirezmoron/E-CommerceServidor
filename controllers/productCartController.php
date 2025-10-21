@@ -1,10 +1,4 @@
 <?php
-// Ver productos
-if (isset($_GET["cart"])) {
-    $productsCart = ProductCartRepository::getCartProducts($_GET["cart"]);
-    require_once('views/cartView.phtml');
-    exit;
-}
 // Añadir al carrito
 if (isset($_GET['add'])) {
     $idCart = $_GET["cart"];

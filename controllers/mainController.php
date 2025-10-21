@@ -32,7 +32,6 @@ if (isset($_GET['c'])) {
         $created = CartRepository::createCart($_SESSION['user'] ? $_SESSION['user']->getId() : 0);
         if ($created) {
             $cart = CartRepository::getCartByUserId($_SESSION['user'] ? $_SESSION['user']->getId() : 0);
-            $productsCart = ProductCartRepository::getCartProducts($cart->getId());
         }
     }
 
