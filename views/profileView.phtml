@@ -1,17 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Perfil de Usuario</title>
 </head>
+
 <body>
     <h2>Perfil</h2>
 
-    <img src="public/img/<?php echo $user->avatar; ?>" width="100"><br>
-    <p>Nombre de usuario: <?php echo $user->username; ?></p>
+    <?php if ($_SESSION['user'] && $_SESSION['user'] !== false) { ?>
+        <?php if ($_SESSION['user']->getAvatar()) { ?>
+            <img src="public/img/<?php echo $_SESSION['user']->getAvatar(); ?>" alt="Imagen de perfil" style="width:150px;height:150px;">
+        <?php } ?>
+
+        <p>Nombre de usuario: <?php echo $_SESSION['user']->getUsername(); ?></p>
+        <p>Email: <?php echo $_SESSION['user']->getEmail(); ?></p>
+        <p>Teléfono: <?php echo $_SESSION['user']->getPhone(); ?></p>
+    <?php } ?>
 
     <a href="index.php">Volver</a>
-    
+
 </body>
+
 </html>

@@ -12,6 +12,7 @@
     if (!empty($_SESSION['user'])) {
         echo "<a href='index.php?c=user&logout=1'>Cerrar Sesión</a>";
         echo " | <a href='index.php?c=cart&cart=1'>Mi Carrito</a>";
+        echo " | <a href='index.php?c=user&profile=1'>Mi Perfil</a>";
         if ($_SESSION['user']->getRol()) {
             echo " | <a href='index.php?c=product&create=1'>Crear producto</a>";
         }
