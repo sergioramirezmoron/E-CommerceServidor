@@ -1,24 +1,28 @@
 <?php
 if (isset($_GET['cart'])) {
-    // si usas sesión/consulta de items, ponlo aquí; si no, solo carga la vista
     require_once('views/cartView.phtml');
     exit;
 }
 
 // Ver carrito
-if (isset($GET['cart'])){
+if (isset($GET['cart'])) {
     $cartId = CartRepository::getCartByUserId($_SESSION['user']->getId());
     $products = ProductCartRepository::getCartProducts($cartId);
     require_once('views/cartView.phtml');
     exit;
 }
 
+// Finalizar compra
+if (isset($_POST["finishBuys"])) {
+    require_once('views/soldView.phtml');
+    exit;
+}
 
 // Añadir al carrito
-if (isset($_POST['addToCart'])){
-     $db       = Connection::connect();
+if (isset($_POST['addToCart'])) {
+    $db       = Connection::connect();
     $userId   = (int)$_SESSION['user']->getId();
-    $productId= isset($_POST['product_id']) ? (int)$_POST['product_id'] : 0;
+    $productId = isset($_POST['product_id']) ? (int)$_POST['product_id'] : 0;
     $qty      = isset($_POST['qty']) ? max(1, (int)$_POST['qty']) : 1;
     $res = $db->query("SELECT id FROM carts WHERE user_id=$userId LIMIT 1");
     if ($row = $res->fetch_assoc()) {
@@ -29,23 +33,25 @@ if (isset($_POST['addToCart'])){
     }
 
     ProductCartRepository::addProductToCart(null, $cartId, $productId, $qty);
-    header('Location: index.php?c=cart&cart=1'); exit;
+    header('Location: index.php?c=cart&cart=1');
+    exit;
 }
 
 
 //Eliminar del carrito
-if (isset($_POST['deleteFromCart'])){
-    if (!isset($_SESSION['user']) || !$_SESSION['USER']){
-        header ('Location: index-php?c=user&login=1');
+if (isset($_POST['deleteFromCart'])) {
+    if (!isset($_SESSION['user']) || !$_SESSION['USER']) {
+        header('Location: index-php?c=user&login=1');
         exit;
     }
-
-
 }
 
 //Ver historial del carrito
 if (isset($_GET['orders'])) {
-    if (!isset($_SESSION['user']) || !$_SESSION['user']) { header('Location: index.php?c=user&login=1'); exit; }
+    if (!isset($_SESSION['user']) || !$_SESSION['user']) {
+        header('Location: index.php?c=user&login=1');
+        exit;
+    }
 
     $db     = Connection::connect();
     $userId = (int)$_SESSION['user']->getId();
@@ -58,7 +64,10 @@ if (isset($_GET['orders'])) {
 }
 // Vaciar el carrito
 if (isset($_GET['clear'])) {
-    if (!isset($_SESSION['user']) || !$_SESSION['user']) { header('Location: index.php?c=user&login=1'); exit; }
+    if (!isset($_SESSION['user']) || !$_SESSION['user']) {
+        header('Location: index.php?c=user&login=1');
+        exit;
+    }
 
     $db     = Connection::connect();
     $userId = (int)$_SESSION['user']->getId();
@@ -68,12 +77,16 @@ if (isset($_GET['clear'])) {
         $cartId = (int)$row['id'];
         $db->query("DELETE FROM productcarts WHERE idCart = $cartId");
     }
-    header('Location: index.php?c=cart&index=1'); exit;
+    header('Location: index.php?c=cart&index=1');
+    exit;
 }
 
 //Ver si el carrito esta pagado
 if (isset($_GET['paid'])) {
-    if (!isset($_SESSION['user']) || !$_SESSION['user']) { header('Location: index.php?c=user&login=1'); exit; }
+    if (!isset($_SESSION['user']) || !$_SESSION['user']) {
+        header('Location: index.php?c=user&login=1');
+        exit;
+    }
     $orderId = (int)$_GET['paid'];
     require_once('views/paidView.phtml');
     exit;
