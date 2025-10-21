@@ -10,8 +10,8 @@
 <body>
     <h1>Tu Carrito</h1>
     <?php
-    foreach ($products as $product) {
-        echo $product->getId();
+    foreach ($productsCart as $product) {
+        echo $product->getIdProduct(). " x" . $product->getQuantity();
     }
     ?>
     <form action="index.php?c=cart&finish=1" method="POST">

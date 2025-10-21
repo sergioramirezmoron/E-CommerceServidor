@@ -1,7 +1,7 @@
 <?php
 // Ver carrito
 if (isset($_GET['cart'])) {
-    $products = ProductCartRepository::getCartProducts($_GET["cart"]);
+    $productsCart = ProductCartRepository::getCartProducts($_GET["cart"]);
     require_once('views/cartView.phtml');
     exit;
 }
