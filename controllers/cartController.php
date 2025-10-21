@@ -5,7 +5,7 @@ if (isset($_GET['cart'])) {
 }
 
 // Ver carrito
-if (isset($GET['cart'])) {
+if (isset($_GET['cart'])) {
     $cartId = CartRepository::getCartByUserId($_SESSION['user']->getId());
     $products = ProductCartRepository::getCartProducts($cartId);
     require_once('views/cartView.phtml');
@@ -15,23 +15,6 @@ if (isset($GET['cart'])) {
 // Finalizar compra
 if (isset($_POST["finishBuys"])) {
     require_once('views/soldView.phtml');
-    exit;
-}
-
-//Ver historial del carrito
-if (isset($_GET['orders'])) {
-    if (!isset($_SESSION['user']) || !$_SESSION['user']) {
-        header('Location: index.php?c=user&login=1');
-        exit;
-    }
-
-    $db     = Connection::connect();
-    $userId = (int)$_SESSION['user']->getId();
-    $orders = [];
-    $r = $db->query("SELECT id, total, created_at FROM orders WHERE user_id=$userId ORDER BY id DESC");
-    if ($r) while ($o = $r->fetch_assoc()) $orders[] = $o;
-
-    require_once('views/ordersView.phtml');
     exit;
 }
 

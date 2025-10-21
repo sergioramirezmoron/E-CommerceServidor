@@ -32,7 +32,12 @@ class CategoryRepository
     {
         $db = Connection::connect();
         $q = "INSERT INTO categories VALUES (null, '$name')";
-        $db->query($q);
+        $result = $db->query($q);
+        if ($result) {
+            $db->insert_id;
+        } else {
+            false;
+        }
         $db->close();
     }
 

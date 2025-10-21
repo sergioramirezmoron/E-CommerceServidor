@@ -3,7 +3,7 @@
 <?php
 class ProductCartRepository
 {
-    public static function addProductToCart($id, $idCart, $idProduct, $quantity)
+    public static function addProductToCart($idCart, $idProduct, $quantity)
     {
         $db = Connection::connect();
         $q = "INSERT INTO product_cart VALUES (null, $quantity, $idCart, $idProduct)";
