@@ -1,5 +1,11 @@
 <?php
-
+// Ver productos
+if(isset($_GET["cart"])){
+    $cartId = CartRepository::getCartByUserId($_SESSION['user']->getId());
+    $productsCart = ProductCartRepository::getCartProducts($cartId);
+    require_once('views/cartView.phtml');
+    exit;
+}
 // Añadir al carrito
 if (isset($_GET['add'])) {
     ProductCartRepository::addProductToCart(null, $cartId, $productId, $qty);

@@ -11,7 +11,9 @@
     <?php
     if (!empty($_SESSION['user'])) {
         echo "<a href='index.php?c=user&logout=1'>Cerrar Sesión</a>";
-        echo " | <a href='index.php?c=cart&cart=1'>Mi Carrito</a>";
+        ?>
+        | <a href='index.php?c=cart&cart=<?php echo CartRepository::getCartByUserId($_SESSION["user"]->getId())->getId()?>'>Mi Carrito</a>
+        <?php
         echo " | <a href='index.php?c=user&profile=1'>Mi Perfil</a>";
         
         if ($_SESSION['user']->getRol()) {
