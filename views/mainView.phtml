@@ -20,6 +20,7 @@
         
         if ($_SESSION['user']->getRol()) {
             echo " | <a href='index.php?c=product&create=1'>Crear producto</a>";
+            echo " | <a href='index.php?c=category&create=1'>Crear categoría</a>";
         }
     } else {
         echo "<a href='index.php?c=user&login=1'>Iniciar Sesión</a> | <a href='index.php?c=user&register=1'>Registrarse</a>";
