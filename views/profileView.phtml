@@ -17,18 +17,14 @@
             <nav class="nav">
                 <a href="index.php" class="logo">🛒 E-Commerce</a>
                 <ul class="nav-links">
-                    <?php if (!empty($_SESSION['user'])): ?>
-                        <li><a href="index.php?c=user&logout=1">Cerrar Sesión</a></li>
+                    <?php if (!empty($_SESSION['user'])) { ?>
                         <li><a href="index.php?c=cart&cart=<?php echo CartRepository::getCartByUserId($_SESSION["user"]->getId())->getId(); ?>">🛍️ Mi Carrito</a></li>
                         <li><a href="index.php?c=user&profile=1">👤 Mi Perfil</a></li>
-                        <?php if ($_SESSION['user']->getRol()): ?>
+                        <?php if ($_SESSION['user']->getRol()) { ?>
                             <li><a href="index.php?c=product&create=1">➕ Crear Producto</a></li>
                             <li><a href="index.php?c=category&create=1">📁 Crear Categoría</a></li>
-                        <?php endif; ?>
-                    <?php else: ?>
-                        <li><a href="index.php?c=user&login=1">Iniciar Sesión</a></li>
-                        <li><a href="index.php?c=user&register=1">Registrarse</a></li>
-                    <?php endif; ?>
+                        <?php } ?>
+                    <?php } ?>
                 </ul>
             </nav>
         </div>
@@ -46,32 +42,32 @@
                 <?php if ($_SESSION['user'] && $_SESSION['user'] !== false): ?>
                     <div class="profile-content">
                         <div class="profile-avatar">
-                            <?php if ($_SESSION['user']->getAvatar()): ?>
+                            <?php if ($_SESSION['user']->getAvatar()) { ?>
                                 <img src="public/img/<?php echo $_SESSION['user']->getAvatar(); ?>"
                                     alt="Imagen de perfil"
                                     class="avatar-image">
-                            <?php else: ?>
+                            <?php } else { ?>
                                 <div class="avatar-placeholder">
                                     <span class="avatar-icon">👤</span>
                                 </div>
-                            <?php endif; ?>
+                            <?php } ?>
                         </div>
 
                         <div class="profile-info">
                             <div class="info-card">
                                 <div class="info-item">
                                     <span class="info-label">👤 Nombre de usuario:</span>
-                                    <span class="info-value"><?php echo htmlspecialchars($_SESSION['user']->getUsername()); ?></span>
+                                    <span class="info-value"><?php echo $_SESSION['user']->getUsername(); ?></span>
                                 </div>
 
                                 <div class="info-item">
                                     <span class="info-label">📧 Email:</span>
-                                    <span class="info-value"><?php echo htmlspecialchars($_SESSION['user']->getEmail()); ?></span>
+                                    <span class="info-value"><?php echo $_SESSION['user']->getEmail(); ?></span>
                                 </div>
 
                                 <div class="info-item">
                                     <span class="info-label">📱 Teléfono:</span>
-                                    <span class="info-value"><?php echo htmlspecialchars($_SESSION['user']->getPhone()); ?></span>
+                                    <span class="info-value"><?php echo $_SESSION['user']->getPhone(); ?></span>
                                 </div>
 
                                 <div class="info-item">

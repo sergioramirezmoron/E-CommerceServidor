@@ -17,18 +17,14 @@
             <nav class="nav">
                 <a href="index.php" class="logo">🛒 E-Commerce</a>
                 <ul class="nav-links">
-                    <?php if (!empty($_SESSION['user'])): ?>
-                        <li><a href="index.php?c=user&logout=1">Cerrar Sesión</a></li>
+                    <?php if (!empty($_SESSION['user'])) { ?>
                         <li><a href="index.php?c=cart&cart=<?php echo CartRepository::getCartByUserId($_SESSION["user"]->getId())->getId(); ?>">🛍️ Mi Carrito</a></li>
                         <li><a href="index.php?c=user&profile=1">👤 Mi Perfil</a></li>
-                        <?php if ($_SESSION['user']->getRol()): ?>
+                        <?php if ($_SESSION['user']->getRol()) { ?>
                             <li><a href="index.php?c=product&create=1">➕ Crear Producto</a></li>
                             <li><a href="index.php?c=category&create=1">📁 Crear Categoría</a></li>
-                        <?php endif; ?>
-                    <?php else: ?>
-                        <li><a href="index.php?c=user&login=1">Iniciar Sesión</a></li>
-                        <li><a href="index.php?c=user&register=1">Registrarse</a></li>
-                    <?php endif; ?>
+                        <?php } ?>
+                    <?php } ?>
                 </ul>
             </nav>
         </div>
@@ -43,16 +39,16 @@
                     <p class="order-history-subtitle">Revisa todos tus pedidos anteriores</p>
                 </div>
 
-                <?php if (empty($orders)): ?>
+                <?php if (empty($orders)) { ?>
                     <div class="empty-orders">
                         <div class="empty-orders-icon">📦</div>
                         <h2>No tienes pedidos aún</h2>
                         <p>Cuando realices tu primera compra, aparecerá aquí</p>
                         <a href="index.php" class="btn btn-primary btn-large">Comenzar a Comprar</a>
                     </div>
-                <?php else: ?>
+                <?php } else { ?>
                     <div class="orders-list">
-                        <?php foreach ($orders as $order): ?>
+                        <?php foreach ($orders as $order) { ?>
                             <div class="order-card">
                                 <div class="order-header">
                                     <div class="order-info">
@@ -60,16 +56,16 @@
                                         <p class="order-date">📅 <?php echo $order->getDate(); ?></p>
                                     </div>
                                     <div class="order-status">
-                                        <span class="status-badge status-<?php echo strtolower($order->getStatus()); ?>">
+                                        <span class="status-badge status-<?php echo $order->getStatus(); ?>">
                                             <?php echo $order->getStatus(); ?>
                                         </span>
                                     </div>
                                 </div>
                             </div>
                     </div>
-                <?php endforeach; ?>
+                <?php } ?>
             </div>
-        <?php endif; ?>
+        <?php } ?>
 
         <div class="order-history-actions">
             <a href="index.php?c=user&profile=1" class="btn btn-outline">

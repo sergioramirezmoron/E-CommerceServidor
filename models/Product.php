@@ -12,7 +12,7 @@ class Product
     private $image;
 
 
-    public function __construct($id, $name, $description, $price, $stock, $image, $category,)
+    public function __construct($id, $name, $description, $price, $stock, $image, $category)
     {
         $this->id = $id;
         $this->name = $name;
