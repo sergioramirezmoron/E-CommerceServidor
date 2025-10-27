@@ -1,5 +1,11 @@
 <?php
 require_once 'helpers/FileHelper.php';
+// Delete
+if (isset($_GET['delete'])) {
+    ProductRepository::deleteProduct($_GET['id']);
+    header("Location: index.php?c=product");
+    exit();
+}
 //Create
 if (isset($_GET["create"])) {
     if (isset($_POST['name']) && isset($_POST['description']) && isset($_POST['price']) && isset($_POST['stock']) && isset($_POST["idCategoria"]) && isset($_FILES['productImage'])) {
@@ -9,7 +15,7 @@ if (isset($_GET["create"])) {
         $stock = $_POST['stock'];
         $idCategory = $_POST['idCategoria'];
         $productImagePath = null;
-        
+
         if (isset($_FILES['productImage']) && isset($_FILES['productImage']['tmp_name']) && $_FILES['productImage']['error'] == 0) {
             $tmp = $_FILES['productImage']['tmp_name'];
             $fileName = $_FILES['productImage']['name'];
@@ -36,12 +42,3 @@ if (!isset($_GET['id'])) {
     require_once 'views/productView.phtml';
     exit();
 }
-
-// Delete
-if (isset($_GET['delete'])) {
-    ProductRepository::deleteProduct($_GET['id']);
-    header("Location: index.php?c=product");
-    exit();
-}
-
-
