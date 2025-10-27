@@ -532,6 +532,83 @@ body {
     margin-bottom: 1rem;
 }
 
+/* Sección de pedidos recientes en perfil */
+.recent-orders {
+    background: #f8f9fa;
+    border-radius: 10px;
+    padding: 1.5rem;
+    border: 1px solid #e9ecef;
+    margin-bottom: 2rem;
+}
+
+.recent-orders-title {
+    color: var(--primary-color);
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.recent-orders-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.recent-order-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem;
+    background: var(--white);
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+    transition: var(--transition);
+}
+
+.recent-order-item:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.recent-order-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.recent-order-number {
+    font-weight: 600;
+    color: var(--primary-color);
+    font-size: 0.9rem;
+}
+
+.recent-order-date {
+    color: var(--dark-gray);
+    font-size: 0.8rem;
+}
+
+.recent-order-status {
+    display: flex;
+    align-items: center;
+}
+
+.recent-orders-footer {
+    text-align: center;
+    padding-top: 1rem;
+    border-top: 1px solid #e9ecef;
+}
+
+.no-recent-orders {
+    text-align: center;
+    padding: 2rem 1rem;
+    color: var(--dark-gray);
+}
+
+.no-recent-orders p {
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+}
+
 /* Vista de compra exitosa */
 .success-container {
     background: var(--white);
@@ -679,6 +756,270 @@ body {
     flex-wrap: wrap;
 }
 
+/* Vista de historial de pedidos */
+.order-history-container {
+    background: var(--white);
+    border-radius: 15px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    margin: 2rem 0;
+}
+
+.order-history-header {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: var(--white);
+    padding: 2rem;
+    text-align: center;
+}
+
+.order-history-title {
+    font-size: 2.5rem;
+    font-weight: 300;
+    margin-bottom: 0.5rem;
+}
+
+.order-history-subtitle {
+    font-size: 1.1rem;
+    opacity: 0.9;
+}
+
+.orders-list {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.order-card {
+    background: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 12px;
+    padding: 2rem;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.order-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(135deg, var(--secondary-color), var(--success-color));
+}
+
+.order-card:hover {
+    box-shadow: var(--shadow-hover);
+    transform: translateY(-3px);
+    border-color: var(--secondary-color);
+}
+
+.order-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.order-info {
+    flex: 1;
+    min-width: 200px;
+}
+
+.order-number {
+    color: var(--primary-color);
+    font-size: 1.4rem;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.order-date {
+    color: var(--dark-gray);
+    font-size: 0.95rem;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.order-status {
+    display: flex;
+    align-items: center;
+}
+
+.status-badge {
+    padding: 0.6rem 1.2rem;
+    border-radius: 25px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.status-completado {
+    background: linear-gradient(135deg, #d4edda, #c3e6cb);
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.status-pendiente {
+    background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+    color: #856404;
+    border: 1px solid #ffeaa7;
+}
+
+.status-procesando {
+    background: linear-gradient(135deg, #cce5ff, #99d6ff);
+    color: #004085;
+    border: 1px solid #99d6ff;
+}
+
+.status-cancelado {
+    background: linear-gradient(135deg, #f8d7da, #f5c6cb);
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.order-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid #e9ecef;
+}
+
+.order-summary {
+    flex: 1;
+    min-width: 200px;
+}
+
+.summary-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background: var(--white);
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.summary-label {
+    font-weight: 600;
+    color: var(--primary-color);
+    font-size: 1.1rem;
+}
+
+.summary-value {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: var(--accent-color);
+}
+
+.order-actions {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.empty-orders {
+    text-align: center;
+    padding: 4rem 2rem;
+    color: var(--dark-gray);
+}
+
+.empty-orders-icon {
+    font-size: 5rem;
+    margin-bottom: 1.5rem;
+    opacity: 0.6;
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+.empty-orders h2 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    font-size: 1.8rem;
+    font-weight: 500;
+}
+
+.empty-orders p {
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+.order-history-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    padding: 2rem;
+    background: #f8f9fa;
+    border-top: 1px solid #e9ecef;
+    flex-wrap: wrap;
+}
+
+/* Mejoras adicionales para botones pequeños */
+.btn-small {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.85rem;
+    border-radius: 6px;
+    font-weight: 500;
+}
+
+.btn-small:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Animación de entrada para las tarjetas de pedidos */
+.order-card {
+    animation: slideInUp 0.5s ease-out;
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Efecto de hover mejorado para las acciones */
+.order-actions a {
+    position: relative;
+    overflow: hidden;
+}
+
+.order-actions a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.order-actions a:hover::before {
+    left: 100%;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
     .nav {
@@ -752,6 +1093,17 @@ body {
         flex-direction: column;
     }
     
+    /* Responsive para pedidos recientes en perfil */
+    .recent-order-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+    
+    .recent-order-status {
+        align-self: flex-end;
+    }
+    
     /* Responsive para compra exitosa */
     .success-container {
         margin: 1rem;
@@ -777,6 +1129,83 @@ body {
     
     .success-actions {
         flex-direction: column;
+    }
+    
+    /* Responsive para historial de pedidos */
+    .order-history-title {
+        font-size: 2rem;
+    }
+    
+    .order-history-header {
+        padding: 1.5rem;
+    }
+    
+    .orders-list {
+        padding: 1rem;
+        gap: 1rem;
+    }
+    
+    .order-card {
+        padding: 1.5rem;
+    }
+    
+    .order-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+        margin-bottom: 1rem;
+    }
+    
+    .order-info {
+        width: 100%;
+    }
+    
+    .order-status {
+        align-self: flex-end;
+    }
+    
+    .order-details {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1rem;
+        padding-top: 1rem;
+    }
+    
+    .order-summary {
+        width: 100%;
+    }
+    
+    .order-actions {
+        width: 100%;
+        justify-content: stretch;
+        gap: 0.5rem;
+    }
+    
+    .order-actions .btn {
+        flex: 1;
+        min-width: 120px;
+        text-align: center;
+    }
+    
+    .order-history-actions {
+        flex-direction: column;
+        padding: 1.5rem;
+    }
+    
+    .order-history-actions .btn {
+        width: 100%;
+    }
+    
+    .empty-orders {
+        padding: 3rem 1rem;
+    }
+    
+    .empty-orders-icon {
+        font-size: 4rem;
+    }
+    
+    .empty-orders h2 {
+        font-size: 1.5rem;
     }
 }
 
