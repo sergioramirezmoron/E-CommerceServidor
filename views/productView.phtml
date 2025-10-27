@@ -1,24 +1,216 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title><?php echo htmlspecialchars($product->getName()); ?> - E-Commerce</title>
+    <link rel="stylesheet" href="public/css/main.css">
+    <link rel="stylesheet" href="public/css/forms.css">
+    <link rel="stylesheet" href="public/css/cart.css">
 </head>
 
 <body>
-    <h2>Detalle del producto</h2>
-    <?php
-    echo "<h3>" . $product->getName() . "</h3>";
-    echo "<img src='public/img/" . $product->getImage() . "' alt='" . $product->getName() . "' style='width:150px;height:150px;'>";
-    echo "<p>" . $product->getDescription() . "</p>";
-    echo "<p>Precio: $" . $product->getPrice() . "</p>";
-    echo "<p>Stock disponible: " . $product->getStock() . "</p>";
-    ?>
-    <div>
-        <a href="index.php?c=product&edit=1&id=<?php echo $product->getId(); ?>">Editar Producto</a>
-    <a href="index.php">Volver</a>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <a href="index.php" class="logo">🛒 E-Commerce</a>
+                <ul class="nav-links">
+                    <?php if (!empty($_SESSION['user'])): ?>
+                        <li><a href="index.php?c=user&logout=1">Cerrar Sesión</a></li>
+                        <li><a href="index.php?c=cart&cart=<?php echo CartRepository::getCartByUserId($_SESSION["user"]->getId())->getId(); ?>">🛍️ Mi Carrito</a></li>
+                        <li><a href="index.php?c=user&profile=1">👤 Mi Perfil</a></li>
+                        <?php if ($_SESSION['user']->getRol()): ?>
+                            <li><a href="index.php?c=product&create=1">➕ Crear Producto</a></li>
+                            <li><a href="index.php?c=category&create=1">📁 Crear Categoría</a></li>
+                        <?php endif; ?>
+                    <?php else: ?>
+                        <li><a href="index.php?c=user&login=1">Iniciar Sesión</a></li>
+                        <li><a href="index.php?c=user&register=1">Registrarse</a></li>
+                    <?php endif; ?>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Contenido Principal -->
+    <main class="main-content">
+        <div class="container">
+            <div class="product-detail">
+                <div class="product-detail-content">
+                    <div class="product-detail-image">
+                        <img src="public/img/<?php echo $product->getImage(); ?>" 
+                             alt="<?php echo htmlspecialchars($product->getName()); ?>" 
+                             class="product-main-image">
+                    </div>
+                    
+                    <div class="product-detail-info">
+                        <h1 class="product-detail-title"><?php echo htmlspecialchars($product->getName()); ?></h1>
+                        
+                        <div class="product-detail-price">
+                            <span class="price-label">Precio:</span>
+                            <span class="price-amount">$<?php echo number_format($product->getPrice(), 2); ?></span>
+                        </div>
+                        
+                        <div class="product-detail-stock">
+                            <span class="stock-label">Stock disponible:</span>
+                            <span class="stock-amount"><?php echo $product->getStock(); ?> unidades</span>
+                        </div>
+                        
+                        <div class="product-detail-description">
+                            <h3>Descripción del Producto</h3>
+                            <p><?php echo nl2br(htmlspecialchars($product->getDescription())); ?></p>
+                        </div>
+                        
+                        <div class="product-detail-actions">
+                            <?php if (!empty($_SESSION['user'])): ?>
+                                <a href="index.php?c=productCart&cart=<?php echo CartRepository::getCartByUserId($_SESSION["user"]->getId())->getId(); ?>&add=<?php echo $product->getId(); ?>" 
+                                   class="btn btn-success btn-large">🛒 Agregar al Carrito</a>
+                            <?php else: ?>
+                                <a href="index.php?c=user&login=1" class="btn btn-primary btn-large">Iniciar Sesión para Comprar</a>
+                            <?php endif; ?>
+                            
+                            <?php if (!empty($_SESSION['user']) && $_SESSION['user']->getRol()): ?>
+                                <a href="index.php?c=product&edit=1&id=<?php echo $product->getId(); ?>" 
+                                   class="btn btn-outline">✏️ Editar Producto</a>
+                            <?php endif; ?>
+                            
+                            <a href="index.php" class="btn btn-outline">← Volver a la Tienda</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 E-Commerce. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <style>
+        .product-detail {
+            background: var(--white);
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            margin: 2rem 0;
+        }
+        
+        .product-detail-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            padding: 3rem;
+        }
+        
+        .product-main-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 10px;
+            background-color: var(--light-gray);
+        }
+        
+        .product-detail-title {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-weight: 300;
+        }
+        
+        .product-detail-price {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+        
+        .price-label {
+            font-size: 1.2rem;
+            color: var(--dark-gray);
+        }
+        
+        .price-amount {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--accent-color);
+        }
+        
+        .product-detail-stock {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding: 0.75rem;
+            background: #e8f5e8;
+            border-radius: 8px;
+            border-left: 4px solid var(--success-color);
+        }
+        
+        .stock-label {
+            color: var(--dark-gray);
+        }
+        
+        .stock-amount {
+            font-weight: 600;
+            color: var(--success-color);
+        }
+        
+        .product-detail-description {
+            margin-bottom: 2rem;
+        }
+        
+        .product-detail-description h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+        
+        .product-detail-description p {
+            line-height: 1.8;
+            color: var(--dark-gray);
+            font-size: 1.1rem;
+        }
+        
+        .product-detail-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .btn-large {
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+        
+        @media (max-width: 768px) {
+            .product-detail-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                padding: 2rem;
+            }
+            
+            .product-main-image {
+                height: 250px;
+            }
+            
+            .product-detail-title {
+                font-size: 2rem;
+            }
+            
+            .product-detail-actions {
+                flex-direction: column;
+            }
+        }
+    </style>
 </body>
 
 </html>

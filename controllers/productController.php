@@ -16,11 +16,9 @@ if (isset($_GET["edit"])) {
         $stock = $_POST['stock'];
         $idCategory = $_POST['idCategoria'];
         
-        // Obtener el producto actual para mantener la imagen si no se sube una nueva
         $currentProduct = ProductRepository::getProductById($id);
         $productImagePath = $currentProduct->getImage();
-
-        // Si se sube una nueva imagen, procesarla
+     
         if (isset($_FILES['productImage']) && isset($_FILES['productImage']['tmp_name']) && $_FILES['productImage']['error'] == 0) {
             $tmp = $_FILES['productImage']['tmp_name'];
             $fileName = $_FILES['productImage']['name'];

@@ -1,22 +1,48 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Iniciar Sesión - E-Commerce</title>
+    <link rel="stylesheet" href="public/css/main.css">
+    <link rel="stylesheet" href="public/css/forms.css">
 </head>
 
 <body>
-    LOGIN
-    <form action="index.php?c=user" method="POST">
-        <input type="text" name="username" placeholder="nombre de usuario">
-        <input type="password" name="password" placeholder="Tu contraseña">
-        <input type="submit" value="Entrar">
-    </form>
+    <div class="auth-container">
+        <div class="auth-form">
+            <h1 class="auth-title">Iniciar Sesión</h1>
+            <p class="auth-subtitle">Accede a tu cuenta para continuar</p>
+            
+            <form action="index.php?c=user" method="POST">
+                <div class="form-group">
+                    <input type="text" 
+                           name="username" 
+                           placeholder="Nombre de usuario" 
+                           class="form-input" 
+                           required>
+                </div>
+                
+                <div class="form-group">
+                    <input type="password" 
+                           name="password" 
+                           placeholder="Tu contraseña" 
+                           class="form-input" 
+                           required>
+                </div>
+                
+                <button type="submit" class="btn-submit">
+                    Entrar
+                </button>
+            </form>
 
-    <p>¿No tienes cuenta? <a href="index.php?c=user&register=1">Registrarse</a></p>
-    <a href="index.php">Volver</a>
+            <div class="auth-links">
+                <p>¿No tienes cuenta? <a href="index.php?c=user&register=1">Registrarse</a></p>
+                <p><a href="index.php">← Volver al inicio</a></p>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>

@@ -1,48 +1,89 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>E-Commerce - Tienda Online</title>
+    <link rel="stylesheet" href="public/css/main.css">
+    <link rel="stylesheet" href="public/css/forms.css">
+    <link rel="stylesheet" href="public/css/cart.css">
 </head>
 
 <body>
-    <?php
-    if (!empty($_SESSION['user'])) {
-        echo "<a href='index.php?c=user&logout=1'>Cerrar Sesión</a>";
-    }
-    ?>
-    <?php
-    if (!empty($_SESSION['user'])) {
-        echo " | <a href='index.php?c=cart&cart=" . CartRepository::getCartByUserId($_SESSION["user"]->getId())->getId() . "'>Mi Carrito</a>";
-        echo " | <a href='index.php?c=user&profile=1'>Mi Perfil</a>";
-        
-        if ($_SESSION['user']->getRol()) {
-            echo " | <a href='index.php?c=product&create=1'>Crear producto</a>";
-            echo " | <a href='index.php?c=category&create=1'>Crear categoría</a>";
-        }
-    } else {
-        echo "<a href='index.php?c=user&login=1'>Iniciar Sesión</a> | <a href='index.php?c=user&register=1'>Registrarse</a>";
-    }
-    ?>
-    <?php
-    foreach ($products as $product) {
-        echo "<div>";
-        echo "<img src='public/img/" . $product->getImage() . "' alt='" . $product->getName() . "' style='width:150px;height:150px;'>";
-        echo "<h2>" . $product->getName() . "</h2>";
-        echo "<p>Precio: $" . $product->getPrice() . "</p>";
-        echo "<a href='index.php?c=product&id=" . $product->getId() . "'>Ver Producto</a>";
-        if (!empty($_SESSION['user'])) {
-            echo " | <a href='index.php?c=productCart&cart=" . CartRepository::getCartByUserId($_SESSION["user"]->getId())->getId() . "&add=" . $product->getId() . "'>Agregar al Carrito</a>";
-            
-            if ($_SESSION['user']->getRol()) {
-                echo " | <a href='index.php?c=product&delete=1&id=" . $product->getId() . "'>Eliminar producto</a>";
-            }
-        }
-        echo "</div>";
-    }
-    ?>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <a href="index.php" class="logo">🛒 E-Commerce</a>
+                <ul class="nav-links">
+                    <?php if (!empty($_SESSION['user'])): ?>
+                        <li><a href="index.php?c=user&logout=1">Cerrar Sesión</a></li>
+                        <li><a href="index.php?c=cart&cart=<?php echo CartRepository::getCartByUserId($_SESSION["user"]->getId())->getId(); ?>">🛍️ Mi Carrito</a></li>
+                        <li><a href="index.php?c=user&profile=1">👤 Mi Perfil</a></li>
+                        <?php if ($_SESSION['user']->getRol()): ?>
+                            <li><a href="index.php?c=product&create=1">➕ Crear Producto</a></li>
+                            <li><a href="index.php?c=category&create=1">📁 Crear Categoría</a></li>
+                        <?php endif; ?>
+                    <?php else: ?>
+                        <li><a href="index.php?c=user&login=1">Iniciar Sesión</a></li>
+                        <li><a href="index.php?c=user&register=1">Registrarse</a></li>
+                    <?php endif; ?>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Contenido Principal -->
+    <main class="main-content">
+        <div class="container">
+            <div class="text-center mb-4">
+                <h1>Bienvenido a Nuestra Tienda</h1>
+                <p>Descubre productos increíbles a precios excepcionales</p>
+            </div>
+
+            <!-- Grid de Productos -->
+            <div class="products-grid">
+                <?php foreach ($products as $product): ?>
+                    <div class="product-card">
+                        <img src="public/img/<?php echo $product->getImage(); ?>" 
+                             alt="<?php echo htmlspecialchars($product->getName()); ?>" 
+                             class="product-image">
+                        <div class="product-info">
+                            <h3 class="product-title"><?php echo htmlspecialchars($product->getName()); ?></h3>
+                            <p class="product-price">$<?php echo number_format($product->getPrice(), 2); ?></p>
+                            <div class="product-actions">
+                                <a href="index.php?c=product&id=<?php echo $product->getId(); ?>" 
+                                   class="btn btn-primary">Ver Producto</a>
+                                <?php if (!empty($_SESSION['user'])): ?>
+                                    <a href="index.php?c=productCart&cart=<?php echo CartRepository::getCartByUserId($_SESSION["user"]->getId())->getId(); ?>&add=<?php echo $product->getId(); ?>" 
+                                       class="btn btn-success">Agregar al Carrito</a>
+                                    <?php if ($_SESSION['user']->getRol()): ?>
+                                        <a href="index.php?c=product&delete=1&id=<?php echo $product->getId(); ?>" 
+                                           class="btn btn-danger btn-small">Eliminar</a>
+                                    <?php endif; ?>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+
+            <?php if (empty($products)): ?>
+                <div class="text-center mt-4">
+                    <h2>No hay productos disponibles</h2>
+                    <p>Vuelve pronto para ver nuestros nuevos productos.</p>
+                </div>
+            <?php endif; ?>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 E-Commerce. Todos los derechos reservados.</p>
+        </div>
+    </footer>
 </body>
 
 </html>
