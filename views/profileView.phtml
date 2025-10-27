@@ -43,14 +43,6 @@
                     <p class="profile-subtitle">Gestiona tu información personal</p>
                 </div>
 
-<<<<<<< HEAD
-        <p>Nombre de usuario: <?php echo $_SESSION['user']->getUsername(); ?></p>
-        <p>Email: <?php echo $_SESSION['user']->getEmail(); ?></p>
-        <p>Teléfono: <?php echo $_SESSION['user']->getPhone(); ?></p>
-    <?php } ?>
-    <a href = "index.php?c=order&history=1&id=<?= $_SESSION['user']->getId() ?>">Ver historial de pedidos></a>
-    <a href="index.php">Volver</a>
-=======
                 <?php if ($_SESSION['user'] && $_SESSION['user'] !== false): ?>
                     <div class="profile-content">
                         <div class="profile-avatar">
@@ -71,7 +63,6 @@
                                     <span class="info-label">👤 Nombre de usuario:</span>
                                     <span class="info-value"><?php echo htmlspecialchars($_SESSION['user']->getUsername()); ?></span>
                                 </div>
->>>>>>> 940e65ffa4c290521fb973cd68ed0302b786b8bc
 
                                 <div class="info-item">
                                     <span class="info-label">📧 Email:</span>

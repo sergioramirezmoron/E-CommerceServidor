@@ -11,43 +11,6 @@
 </head>
 
 <body>
-<<<<<<< HEAD
-    
-    <?php
-    if (!empty($_SESSION['user'])) {
-        echo "<a href='index.php?c=user&logout=1'>Cerrar Sesión</a>";
-    }
-    ?>
-    <?php
-    if (!empty($_SESSION['user'])) {
-        echo " | <a href='index.php?c=cart&cart=" . CartRepository::getCartByUserId($_SESSION["user"]->getId())->getId() . "'>Mi Carrito</a>";
-        echo " | <a href='index.php?c=user&profile=1'>Mi Perfil</a>";
-        
-        if ($_SESSION['user']->getRol()) {
-            echo " | <a href='index.php?c=product&create=1'>Crear producto</a>";
-        }
-    } else {
-        echo "<a href='index.php?c=user&login=1'>Iniciar Sesión</a> | <a href='index.php?c=user&register=1'>Registrarse</a>";
-    }
-    ?>
-    <?php
-    foreach ($products as $product) {
-        echo "<div>";
-        echo "<img src='public/img/" . $product->getImage() . "' alt='" . $product->getName() . "' style='width:150px;height:150px;'>";
-        echo "<h2>" . $product->getName() . "</h2>";
-        echo "<p>Precio: $" . $product->getPrice() . "</p>";
-        echo "<a href='index.php?c=product&id=" . $product->getId() . "'>Ver Producto</a>";
-        if (!empty($_SESSION['user'])) {
-            echo " | <a href='index.php?c=productCart&cart=" . CartRepository::getCartByUserId($_SESSION["user"]->getId())->getId() . "&add=" . $product->getId() . "'>Agregar al Carrito</a>";
-            
-            if ($_SESSION['user']->getRol()) {
-                echo " | <a href='index.php?c=product&delete=1&id=" . $product->getId() . "'>Eliminar producto</a>";
-            }
-        }
-        echo "</div>";
-    }
-    ?>
-=======
     <!-- Header -->
     <header class="header">
         <div class="container">
@@ -121,7 +84,6 @@
             <p>&copy; 2024 E-Commerce. Todos los derechos reservados.</p>
         </div>
     </footer>
->>>>>>> 940e65ffa4c290521fb973cd68ed0302b786b8bc
 </body>
 
 </html>
