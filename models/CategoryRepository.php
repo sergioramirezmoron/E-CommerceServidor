@@ -28,10 +28,10 @@ class CategoryRepository
         return $category;
     }
 
-    public static function addCategory($name)
+    public static function addCategory($name, $description)
     {
         $db = Connection::connect();
-        $q = "INSERT INTO categories VALUES (null, '$name')";
+        $q = "INSERT INTO categories VALUES (null, '$name', '$description')";
         $result = $db->query($q);
         if ($result) {
             $db->insert_id;

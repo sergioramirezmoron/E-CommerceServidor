@@ -1,41 +1,85 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Registro - E-Commerce</title>
+    <link rel="stylesheet" href="public/css/main.css">
+    <link rel="stylesheet" href="public/css/forms.css">
 </head>
 
 <body>
-    <!DOCTYPE html>
-    <html lang="en">
+    <div class="auth-container">
+        <div class="auth-form">
+            <h1 class="auth-title">Crear Cuenta</h1>
+            <p class="auth-subtitle">Únete a nuestra comunidad</p>
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
-        <link rel="stylesheet" href="public/style.css">
-    </head>
+            <form action="index.php?c=user" method="POST" enctype="multipart/form-data">
+                <div class="form-group">
+                    <input type="text" 
+                           name="username" 
+                           placeholder="Nombre de usuario" 
+                           class="form-input" 
+                           required>
+                </div>
+                
+                <div class="form-group">
+                    <input type="password" 
+                           name="password" 
+                           placeholder="Contraseña" 
+                           class="form-input" 
+                           required>
+                </div>
+                
+                <div class="form-group">
+                    <input type="password" 
+                           name="password2" 
+                           placeholder="Repetir contraseña" 
+                           class="form-input" 
+                           required>
+                </div>
+                
+                <div class="form-group">
+                    <input type="email" 
+                           name="email" 
+                           placeholder="Tu E-Mail" 
+                           class="form-input" 
+                           required>
+                </div>
+                
+                <div class="form-group">
+                    <input type="tel" 
+                           name="phone" 
+                           placeholder="Tu teléfono" 
+                           class="form-input" 
+                           required>
+                </div>
+                
+                <div class="form-group">
+                    <div class="file-input-wrapper">
+                        <input type="file" 
+                               name="avatar" 
+                               id="avatar" 
+                               class="file-input" 
+                               accept="image/*">
+                        <label for="avatar" class="file-input-label">
+                            📷 Seleccionar foto de perfil (opcional)
+                        </label>
+                    </div>
+                </div>
+                
+                <button type="submit" name="registerSubmit" class="btn-submit">
+                    Crear Cuenta
+                </button>
+            </form>
 
-    <body>
-        <h2>Registro de usuario</h2>
-
-        <form action="index.php?c=user" method="POST" enctype="multipart/form-data">
-            <input type="text" name="username" placeholder="Nombre de usuario" required>
-            <input type="password" name="password" placeholder="Contraseña" required>
-            <input type="password" name="password2" placeholder="Repetir contraseña" required>
-            <input type="email" name="email" placeholder="Tu E-Mail" required>
-            <input type="number" name="phone" placeholder="Tu telefono" required>
-            <input type="file" name="avatar">
-            <input type="submit" name="registerSubmit" value="Registrar">
-        </form>
-
-        <p>¿Ya tienes una cuenta? <a href="index.php?c=user&login=1">Inicia Sesión</a></p>
-        <a href="index.php">Volver</a>
-    </body>
-
-    </html>
+            <div class="auth-links">
+                <p>¿Ya tienes una cuenta? <a href="index.php?c=user&login=1">Inicia Sesión</a></p>
+                <p><a href="index.php">← Volver al inicio</a></p>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>

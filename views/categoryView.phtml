@@ -1,23 +1,80 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Crear Categoría - E-Commerce</title>
+    <link rel="stylesheet" href="public/css/main.css">
+    <link rel="stylesheet" href="public/css/forms.css">
 </head>
+
 <body>
-    <h2>Crear categoría</h2>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <a href="index.php" class="logo">🛒 E-Commerce</a>
+                <ul class="nav-links">
+                    <?php if (!empty($_SESSION['user'])): ?>
+                        <li><a href="index.php?c=user&logout=1">Cerrar Sesión</a></li>
+                        <li><a href="index.php?c=cart&cart=<?php echo CartRepository::getCartByUserId($_SESSION["user"]->getId())->getId(); ?>">🛍️ Mi Carrito</a></li>
+                        <li><a href="index.php?c=user&profile=1">👤 Mi Perfil</a></li>
+                        <?php if ($_SESSION['user']->getRol()): ?>
+                            <li><a href="index.php?c=product&create=1">➕ Crear Producto</a></li>
+                            <li><a href="index.php?c=category&create=1">📁 Crear Categoría</a></li>
+                        <?php endif; ?>
+                    <?php else: ?>
+                        <li><a href="index.php?c=user&login=1">Iniciar Sesión</a></li>
+                        <li><a href="index.php?c=user&register=1">Registrarse</a></li>
+                    <?php endif; ?>
+                </ul>
+            </nav>
+        </div>
+    </header>
 
-    <form action="index.php?c=category" method="post">
-    <label>Nombre:</label><br>
-    <input type="text" name="name" required><br><br>
+    <!-- Contenido Principal -->
+    <main class="main-content">
+        <div class="container">
+            <div class="product-form">
+                <h1 class="form-title">📁 Crear Nueva Categoría</h1>
+                <p class="text-center mb-4">Organiza tus productos creando nuevas categorías</p>
 
-    <label>Descripción:</label><br>
-    <textarea name="description" rows="3" cols="30"></textarea><br><br>
+                <form action="index.php?c=category" method="post">
+                    <div class="form-group">
+                        <label class="form-label">Nombre de la Categoría</label>
+                        <input type="text" 
+                               name="name" 
+                               placeholder="Ingresa el nombre de la categoría" 
+                               class="form-input" 
+                               required>
+                    </div>
 
-    <input type="submit" name="createCategory" value="Crear">
-    </form>
+                    <div class="form-group">
+                        <label class="form-label">Descripción</label>
+                        <textarea name="description" 
+                                  placeholder="Describe qué tipo de productos pertenecen a esta categoría" 
+                                  class="form-textarea" 
+                                  rows="4"></textarea>
+                    </div>
 
-<a href="index.php">Volver</a>
+                    <div class="form-actions">
+                        <button type="submit" name="createCategory" class="btn btn-success btn-large">
+                            ✅ Crear Categoría
+                        </button>
+                        <a href="index.php" class="btn-cancel">Cancelar</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 E-Commerce. Todos los derechos reservados.</p>
+        </div>
+    </footer>
 </body>
+
 </html>

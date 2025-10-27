@@ -1,27 +1,277 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perfil de Usuario</title>
+    <title>Mi Perfil - E-Commerce</title>
+    <link rel="stylesheet" href="public/css/main.css">
+    <link rel="stylesheet" href="public/css/forms.css">
+    <link rel="stylesheet" href="public/css/cart.css">
 </head>
 
 <body>
-    <h2>Perfil</h2>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <a href="index.php" class="logo">🛒 E-Commerce</a>
+                <ul class="nav-links">
+                    <?php if (!empty($_SESSION['user'])): ?>
+                        <li><a href="index.php?c=user&logout=1">Cerrar Sesión</a></li>
+                        <li><a href="index.php?c=cart&cart=<?php echo CartRepository::getCartByUserId($_SESSION["user"]->getId())->getId(); ?>">🛍️ Mi Carrito</a></li>
+                        <li><a href="index.php?c=user&profile=1">👤 Mi Perfil</a></li>
+                        <?php if ($_SESSION['user']->getRol()): ?>
+                            <li><a href="index.php?c=product&create=1">➕ Crear Producto</a></li>
+                            <li><a href="index.php?c=category&create=1">📁 Crear Categoría</a></li>
+                        <?php endif; ?>
+                    <?php else: ?>
+                        <li><a href="index.php?c=user&login=1">Iniciar Sesión</a></li>
+                        <li><a href="index.php?c=user&register=1">Registrarse</a></li>
+                    <?php endif; ?>
+                </ul>
+            </nav>
+        </div>
+    </header>
 
-    <?php if ($_SESSION['user'] && $_SESSION['user'] !== false) { ?>
-        <?php if ($_SESSION['user']->getAvatar()) { ?>
-            <img src="public/img/<?php echo $_SESSION['user']->getAvatar(); ?>" alt="Imagen de perfil" style="width:150px;height:150px;">
-        <?php } ?>
+    <!-- Contenido Principal -->
+    <main class="main-content">
+        <div class="container">
+            <div class="profile-container">
+                <div class="profile-header">
+                    <h1 class="profile-title">👤 Mi Perfil</h1>
+                    <p class="profile-subtitle">Gestiona tu información personal</p>
+                </div>
 
+<<<<<<< HEAD
         <p>Nombre de usuario: <?php echo $_SESSION['user']->getUsername(); ?></p>
         <p>Email: <?php echo $_SESSION['user']->getEmail(); ?></p>
         <p>Teléfono: <?php echo $_SESSION['user']->getPhone(); ?></p>
     <?php } ?>
     <a href = "index.php?c=order&history=1&id=<?= $_SESSION['user']->getId() ?>">Ver historial de pedidos></a>
     <a href="index.php">Volver</a>
+=======
+                <?php if ($_SESSION['user'] && $_SESSION['user'] !== false): ?>
+                    <div class="profile-content">
+                        <div class="profile-avatar">
+                            <?php if ($_SESSION['user']->getAvatar()): ?>
+                                <img src="public/img/<?php echo $_SESSION['user']->getAvatar(); ?>" 
+                                     alt="Imagen de perfil" 
+                                     class="avatar-image">
+                            <?php else: ?>
+                                <div class="avatar-placeholder">
+                                    <span class="avatar-icon">👤</span>
+                                </div>
+                            <?php endif; ?>
+                        </div>
 
+                        <div class="profile-info">
+                            <div class="info-card">
+                                <div class="info-item">
+                                    <span class="info-label">👤 Nombre de usuario:</span>
+                                    <span class="info-value"><?php echo htmlspecialchars($_SESSION['user']->getUsername()); ?></span>
+                                </div>
+>>>>>>> 940e65ffa4c290521fb973cd68ed0302b786b8bc
+
+                                <div class="info-item">
+                                    <span class="info-label">📧 Email:</span>
+                                    <span class="info-value"><?php echo htmlspecialchars($_SESSION['user']->getEmail()); ?></span>
+                                </div>
+
+                                <div class="info-item">
+                                    <span class="info-label">📱 Teléfono:</span>
+                                    <span class="info-value"><?php echo htmlspecialchars($_SESSION['user']->getPhone()); ?></span>
+                                </div>
+
+                                <div class="info-item">
+                                    <span class="info-label">🔑 Tipo de cuenta:</span>
+                                    <span class="info-value account-type">
+                                        <?php echo $_SESSION['user']->getRol() ? '👑 Administrador' : '👤 Usuario'; ?>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="profile-actions">
+                                <a href="index.php" class="btn btn-primary">🏠 Volver al Inicio</a>
+                            </div>
+                        </div>
+                    </div>
+                <?php else: ?>
+                    <div class="empty-profile">
+                        <div class="empty-profile-icon">👤</div>
+                        <h2>No hay información de perfil</h2>
+                        <p>Inicia sesión para ver tu perfil</p>
+                        <a href="index.php?c=user&login=1" class="btn btn-primary">Iniciar Sesión</a>
+                    </div>
+                <?php endif; ?>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 E-Commerce. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <style>
+        .profile-container {
+            background: var(--white);
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            margin: 2rem 0;
+        }
+        
+        .profile-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--white);
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .profile-title {
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 0.5rem;
+        }
+        
+        .profile-subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .profile-content {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 3rem;
+            padding: 3rem;
+        }
+        
+        .profile-avatar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .avatar-image {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--light-gray);
+            box-shadow: var(--shadow);
+        }
+        
+        .avatar-placeholder {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: var(--light-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 4px solid #e9ecef;
+        }
+        
+        .avatar-icon {
+            font-size: 4rem;
+            color: var(--dark-gray);
+        }
+        
+        .profile-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+        
+        .info-card {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 2rem;
+            border: 1px solid #e9ecef;
+        }
+        
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .info-item:last-child {
+            border-bottom: none;
+        }
+        
+        .info-label {
+            font-weight: 600;
+            color: var(--primary-color);
+            font-size: 1.1rem;
+        }
+        
+        .info-value {
+            color: var(--dark-gray);
+            font-size: 1.1rem;
+        }
+        
+        .account-type {
+            color: var(--accent-color) !important;
+            font-weight: bold;
+        }
+        
+        .profile-actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .empty-profile {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: var(--dark-gray);
+        }
+        
+        .empty-profile-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+        
+        .empty-profile h2 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        @media (max-width: 768px) {
+            .profile-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                padding: 2rem;
+            }
+            
+            .profile-avatar {
+                order: -1;
+            }
+            
+            .avatar-image,
+            .avatar-placeholder {
+                width: 150px;
+                height: 150px;
+            }
+            
+            .info-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+            
+            .profile-actions {
+                flex-direction: column;
+            }
+        }
+    </style>
 </body>
 
 </html>
