@@ -1,9 +1,14 @@
 <?php
 // Finalizar compra
 if (isset($_POST["finishBuys"])) {
+    $total = ProductCartRepository::getCartTotal($_GET["cart"]);
     ProductCartRepository::finalizePurchase($_GET["cart"]);
-    $order = OrderRepository::createOrder("completed", date("Y-m-d H:i:s"), $_SESSION['user']->getId(), $_GET["cart"]);
-    require_once('views/soldView.phtml');
+    $order = OrderRepository::createOrder($_SESSION['user']->getId(), $_GET["cart"]);
+    if ($order) {
+        require_once('views/soldView.phtml');
+    } else {
+        echo "Error al crear el pedido";
+    }
     exit;
 }
 
