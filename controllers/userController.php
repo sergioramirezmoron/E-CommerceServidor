@@ -14,6 +14,14 @@ if (isset($_GET['profile'])) {
     exit;
 }
 
+//history
+if (isset($_GET['history'])) {
+    $userId = $_SESSION['user']->getId();
+    $orders = OrderRepository::getOrdersByUserId($userId);
+    require_once('views/orderHistoryView.phtml');
+    exit;
+}
+
 //Register
 if (isset($_GET['register'])) {
     require_once('views/registerView.phtml');
