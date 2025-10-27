@@ -251,6 +251,15 @@
     border: 1px solid #c3e6cb;
 }
 
+/* Estilos adicionales para formularios */
+.form-help {
+    display: block;
+    margin-top: 0.5rem;
+    color: var(--dark-gray);
+    font-size: 0.9rem;
+    font-style: italic;
+}
+
 /* Responsive para formularios */
 @media (max-width: 768px) {
     .auth-container {
@@ -274,3 +283,4 @@
         width: 100%;
     }
 }
+

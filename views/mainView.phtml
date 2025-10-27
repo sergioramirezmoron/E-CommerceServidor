@@ -18,7 +18,6 @@
                 <a href="index.php" class="logo">🛒 E-Commerce</a>
                 <ul class="nav-links">
                     <?php if (!empty($_SESSION['user'])): ?>
-                        <li><a href="index.php?c=user&logout=1">Cerrar Sesión</a></li>
                         <li><a href="index.php?c=cart&cart=<?php echo CartRepository::getCartByUserId($_SESSION["user"]->getId())->getId(); ?>">🛍️ Mi Carrito</a></li>
                         <li><a href="index.php?c=user&profile=1">👤 Mi Perfil</a></li>
                         <?php if ($_SESSION['user']->getRol()): ?>
