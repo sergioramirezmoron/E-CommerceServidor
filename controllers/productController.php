@@ -36,3 +36,12 @@ if (!isset($_GET['id'])) {
     require_once 'views/productView.phtml';
     exit();
 }
+
+// Delete
+if (isset($_GET['delete'])) {
+    ProductRepository::deleteProduct($_GET['id']);
+    header("Location: index.php?c=product");
+    exit();
+}
+
+
