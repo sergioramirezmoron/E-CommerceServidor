@@ -10,17 +10,22 @@
 <body>
     <h1>Tu Carrito</h1>
     <?php
+    $total = 0;
     foreach ($productsCart as $product) {
         foreach ($products as $prod) {
             if ($prod->getId() == $product->getIdProduct()) {
-                echo $prod->getName() . " - $" . $prod->getPrice() . " | x" . $product->getQuantity() . "<br>";
+                $totalProducto = $prod->getPrice() * $product->getQuantity();
+                $total += $totalProducto;
+                echo $prod->getName() . " - $" . $prod->getPrice() . " | x" . $product->getQuantity() . " = $" . $totalProducto . "<br>";
             }
         }
     }
     ?>
+    <hr>
+    <h3>Total a pagar: $<?php echo $total; ?></h3>
     <?php
     if (!empty($productsCart)) { ?>
-        <form action="index.php?c=cart&cart=<?php echo $_GET['cart']?>&finish=1" method="POST">
+        <form action="index.php?c=cart&cart=<?php echo $_GET['cart'] ?>&finish=1" method="POST">
             <input type="submit" name="finishBuys" value="Finalizar Compra">
         </form>
 

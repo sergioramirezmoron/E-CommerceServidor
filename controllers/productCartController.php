@@ -16,3 +16,12 @@ if (isset($_POST['clearCart'])) {
     header('Location: index.php?c=cart&cart=' . $idCart);
     exit;
 }
+
+// Eliminar producto del carrito
+if (isset($_POST["deleteProduct"])) {
+    $idCart = $_GET["cart"];
+    $idProduct = $_POST["idProduct"];
+    ProductCartRepository::deleteProductFromCart($idCart, $idProduct);
+    header('Location: index.php?c=cart&cart=' . $idCart);
+    exit;
+}
