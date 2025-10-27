@@ -20,10 +20,10 @@
                     <?php if (!empty($_SESSION['user'])) { ?>
                         <li><a href="index.php?c=cart&cart=<?php echo CartRepository::getCartByUserId($_SESSION["user"]->getId())->getId(); ?>">🛍️ Mi Carrito</a></li>
                         <li><a href="index.php?c=user&profile=1">👤 Mi Perfil</a></li>
-                        <?php if ($_SESSION['user']->getRol()): ?>
+                        <?php if ($_SESSION['user']->getRol()){ ?>
                             <li><a href="index.php?c=product&create=1">➕ Crear Producto</a></li>
                             <li><a href="index.php?c=category&create=1">📁 Crear Categoría</a></li>
-                        <?php endif; ?>
+                        <?php } ?>
                     <?php } ?>
                 </ul>
             </nav>
