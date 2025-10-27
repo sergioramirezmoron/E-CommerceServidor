@@ -54,10 +54,10 @@ class ProductRepository
         return $newId;
     }
 
-    public static function updateProduct($id, $name, $description, $price, $stock, $image, $idCategory,)
+    public static function updateProduct($id, $name, $description, $price, $stock, $image, $idCategory)
     {
         $db = Connection::connect();
-        $q = "UPDATE products SET name='$name', description='$description', price=$price, stock=$stock, image='$image',idCategory=$idCategory, WHERE id=$id";
+        $q = "UPDATE products SET name='$name', description='$description', price=$price, stock=$stock, image='$image', id_category=$idCategory WHERE id=$id";
         $db->query($q);
         $db->close();
     }

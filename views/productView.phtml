@@ -16,6 +16,8 @@
     echo "<p>Precio: $" . $product->getPrice() . "</p>";
     echo "<p>Stock disponible: " . $product->getStock() . "</p>";
     ?>
+    <div>
+        <a href="index.php?c=product&edit=1&id=<?php echo $product->getId(); ?>">Editar Producto</a>
     <a href="index.php">Volver</a>
 </body>
 
