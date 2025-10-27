@@ -18,8 +18,9 @@
     <p>Gracias por tu compra, <strong><?= $_SESSION["user"]->getUsername() ?></strong>.</p>
     <p>Total pagado: <strong><?= number_format($total, 2) ?> €</strong></p>
 
-    <h2>Obtener detalles de pedido:</h2>
-
+    <h2>Detalles del pedido:</h2>  
+        <p><strong>Fecha del pedido:</strong> <?= $order->getDate() ?></p>
+        <p><strong>Estado:</strong> <?= $order->getStatus() ?></p>
     
 
     <a href="index.php">Volver a la tienda</a>

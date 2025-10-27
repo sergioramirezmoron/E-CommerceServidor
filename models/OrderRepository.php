@@ -10,7 +10,7 @@ class OrderRepository
         $q = "SELECT * FROM orders WHERE id = $id";
         $search = $db->query($q);
         if ($row = $search->fetch_assoc()) {
-            return new Order($row['id'], $row['status'], $row['date'], $row['idUser'], $row['idCart']);
+            return new Order($row['id'], $row['status'], $row['date'], $row['id_user'], $row['id_cart']);
         } else {
             return false;
         }
@@ -20,24 +20,25 @@ class OrderRepository
     public static function getOrdersByUserId($userId)
     {
         $db = Connection::connect();
-        $q = "SELECT * FROM orders WHERE idUser = $userId";
+        $q = "SELECT * FROM orders WHERE id_user = $userId";
         $search = $db->query($q);
         $orders = [];
         while ($row = $search->fetch_assoc()) {
-            $orders[] = new Order($row['id'], $row['status'], $row['date'], $row['idUser'], $row['idCart']);
+            $orders[] = new Order($row['id'], $row['status'], $row['date'], $row['id_user'], $row['id_cart']);
         }
 
         return $orders;
     }
 
 
-    public static function createOrder($status, $date, $idUser, $idCart)
+    public static function createOrder($idUser, $idCart)
     {
         $db = Connection::connect();
-        $q = "INSERT INTO orders VALUES (null, $idUser, $idCart, '$status', '$date' )";
+        $q = "INSERT INTO orders VALUES (null, $idUser, $idCart, 'paid', NOW() )";
         $insert = $db->query($q);
         if ($insert) {
-            return true;
+            $orderId = $db->insert_id;
+            return self::getOrderById($orderId);
         } else {
             return false;
         }
@@ -78,8 +79,8 @@ class OrderRepository
                 $row['id'],
                 $row['status'],
                 $row['date'],
-                $row['idUser'],
-                $row['idCart']
+                $row['id_user'],
+                $row['id_cart']
             );
         }
         return $orders;
