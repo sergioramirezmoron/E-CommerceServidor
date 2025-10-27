@@ -19,7 +19,7 @@
         <p>Email: <?php echo $_SESSION['user']->getEmail(); ?></p>
         <p>Teléfono: <?php echo $_SESSION['user']->getPhone(); ?></p>
     <?php } ?>
-
+    <a href = "index.php?c=order&history=1&id=<?= $_SESSION['user']->getId() ?>">Ver historial de pedidos></a>
     <a href="index.php">Volver</a>
 
 </body>
