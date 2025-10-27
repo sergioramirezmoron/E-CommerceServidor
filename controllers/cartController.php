@@ -1,6 +1,7 @@
 <?php
 // Finalizar compra
 if (isset($_POST["finishBuys"])) {
+    $total = ProductCartRepository::getCartTotal($_GET["cart"]);
     ProductCartRepository::finalizePurchase($_GET["cart"]);
     $order = OrderRepository::createOrder($_SESSION['user']->getId(), $_GET["cart"]);
     if ($order) {
